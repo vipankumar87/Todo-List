@@ -14,6 +14,10 @@
     $error_message = '';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if(empty($_POST['username']) || empty($_POST['mail']) || empty($_POST['password'])){
+            $_SESSION['flash_message'] = ['error'=> "Invalid date", 'old_data'=> serialize($_POST)];
+            die(header('location: '.$_SERVER['HTTP_REFERER']));
+        }
         $user = htmlspecialchars($_POST['username']);
         $mail = htmlspecialchars($_POST['mail']);
         $pass = $_POST['password'];
